@@ -1,0 +1,57 @@
+/* 
+body{text-align: center;}
+table{width: 400px; height: 400px; color: rgb(10, 50, 20); text-align: center;
+    background-color: rgb(229, 223, 155); border:center ; border-color: black;; align-self: center;}
+
+#table td, #table th {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    
+  }
+  #table th, #table th:hover {
+    background-color: #bc2f2f;
+}
+
+#table td:hover {
+    cursor: pointer;
+} */
+
+
+
+
+
+
+
+
+.grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .grid-item {
+        background-color: lightblue;
+        border: 1px solid darkblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    #player-turn {
+        font-weight: bold;
+        margin-top: 20px;
+        align-self: center;
+    }
+    
+    button {
+        margin-top: 20px;
+        align-self: center;
+    }
+    

@@ -1,0 +1,102 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style5.css">
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <button id="new-game">New Game</button>
+    <p id="player-turn"></p>
+    <div class="grid-container" id="grid-container"></div>
+   <script>
+    
+
+gridContainer = document.getElementById("grid-container");
+gridClick = document.getElementById("gridclick");
+playerTurnDisplay = document.getElementById("player-turn");
+newGameButton = document.getElementById("new-game");
+
+let currentPlayer = "X";
+let gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+
+// Function to check win condition
+function checkWin() {
+    const winPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Function to check stalemate
+function checkStalemate() {
+    return gameBoard.every(cell => cell !== "");
+}
+
+// Function to handle grid item click
+function GridClick(index) {
+    
+    if (gameBoard[index] === "" && !checkWin() && !checkStalemate()) {
+        gameBoard[index] = currentPlayer;
+        render();
+        if (checkWin()) {
+            playerTurnDisplay.textContent = `Player ${currentPlayer} wins!`;
+        } else if (checkStalemate()) {
+            playerTurnDisplay.textContent = "It's a stalemate!";
+        } else {
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            playerTurnDisplay.textContent = `Player ${currentPlayer}'s turn`;
+        }
+    }
+}
+
+// Function to reset the game
+function resetGame() {
+    currentPlayer = "X";
+    gameBoard = ["", "", "", "", "", "", "", "", ""];
+    for(i = 0; i < 10; i++) {
+        
+    }
+    render();
+    playerTurnDisplay.textContent = `Player ${currentPlayer}'s turn`;
+}
+
+// Function to render the game board
+function render() {
+    gridContainer.innerHTML = "";
+    gameBoard.forEach((symbol, index) => {
+        const gridItem = document.createElement("div");
+        gridItem.classList.add("grid-item");
+        gridItem.textContent = symbol;
+        gridItem.addEventListener("click", () => GridClick(index));
+        gridContainer.appendChild(gridItem);
+    });
+}
+
+
+
+// Event listener for new game button
+newGameButton.addEventListener("click", resetGame);
+
+// Initial render
+resetGame();
+
+   </script>
+</body>
+</html>
